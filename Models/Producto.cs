@@ -6,7 +6,6 @@ namespace WebAPI.Models;
 public partial class Producto
 {
     public int Id { get; set; }
-
     public string NombreProducto { get; set; } = null!;
 
     public int Stock { get; set; }

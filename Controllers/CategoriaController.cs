@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using WebAPI.DTO;
 using WebAPI.Models;
+using ZstdSharp.Unsafe;
 
 namespace WebAPI.Controllers;
 
@@ -55,6 +57,11 @@ public class CategoriaController : Controller
     }
     
     [HttpGet("{id}")]
+    [EndpointName("GetCategoria")]
+    [EndpointSummary("Obtiene una categoría por su id")] 
+    [Consumes("application/json")]
+    [Produces("application/json")]
+    [ProducesResponseType(200)]
     public async Task<IActionResult> GetCategoria(sbyte id)
     {
         var categoria = await _db.Categorias.FindAsync(id);

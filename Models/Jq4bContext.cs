@@ -9,7 +9,7 @@ public partial class Jq4bContext : DbContext
     public Jq4bContext()
     {
     }
-    
+
     public Jq4bContext(DbContextOptions<Jq4bContext> options)
         : base(options)
     {
@@ -35,7 +35,7 @@ public partial class Jq4bContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseMySQL("server=localhost; user=root; password=12345; database=jq4b; port=3306");
+        => optionsBuilder.UseMySQL("server=localhost;user=root;password=12345;database=jq4b;port=3306");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -122,6 +122,7 @@ public partial class Jq4bContext : DbContext
 
             entity.HasIndex(e => e.IdCategoria, "fk_productos_categorias");
 
+            entity.Property(e => e.Imagen).HasMaxLength(255);
             entity.Property(e => e.NombreProducto)
                 .HasMaxLength(100)
                 .HasColumnName("Nombre_Producto");

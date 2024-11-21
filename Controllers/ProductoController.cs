@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebAPI.DTO;
 using WebAPI.Models;
+using WebAPI.Services;
 
 namespace WebAPI.Controllers;
 
@@ -12,11 +13,13 @@ public class ProductoController : Controller
 {
 	private readonly Jq4bContext _db;
 	private readonly IMapper _mapper;
+	private readonly IAlmacenamiento _almacenamiento;
 
-	public ProductoController(Jq4bContext db, IMapper mapper)
+	public ProductoController(Jq4bContext db, IMapper mapper, IAlmacenamiento almacenamiento)
 	{
 		_db = db;
 		_mapper = mapper;
+		_almacenamiento = almacenamiento;
 	}
 
 	[HttpGet]
@@ -36,7 +39,17 @@ public class ProductoController : Controller
 		await _db.SaveChangesAsync();
 		return Ok(new { message = "Producto agregado" });
 	}
-
+	
+	[HttpPost("WithImage")]
+	public async Task<IActionResult> AddProductoWithImage([FromForm] ProductoRequestDTO productoRequest)
+	{
+		var producto = _mapper.Map<Producto>(productoRequest);
+		producto.Imagen = await _almacenamiento.GuardarArchivoAsync("productos", productoRequest.Imagen);
+		_db.Entry(producto).State = EntityState.Added;
+		await _db.SaveChangesAsync();
+		return Ok(new { message = "Producto agregado" });
+	}
+	
 	[HttpPut]
 	public async Task<IActionResult> UpdateProducto([FromBody] ProductoDTO productoDto)
 	{

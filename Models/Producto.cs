@@ -6,6 +6,7 @@ namespace WebAPI.Models;
 public partial class Producto
 {
     public int Id { get; set; }
+
     public string NombreProducto { get; set; } = null!;
 
     public int Stock { get; set; }
@@ -13,6 +14,8 @@ public partial class Producto
     public decimal Precio { get; set; }
 
     public sbyte IdCategoria { get; set; }
+
+    public string? Imagen { get; set; }
 
     public virtual ICollection<Detalleventa> Detalleventa { get; set; } = new List<Detalleventa>();
 

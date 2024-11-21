@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebAPI.Models;
+using WebAPI.Services;
 using WebAPI.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +26,9 @@ builder.Services.AddCors(
                 cors.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
             });
     });
+builder.Services.AddHttpContextAccessor();
+//Is transient because it has dependencies and when it has dependencies it is better to use transient
+builder.Services.AddTransient<IAlmacenamiento, AlmacenamientoLocal>();
 // Configure DbContext with MySQL
 builder.Services.AddDbContext<Jq4bContext>(opciones => 
     opciones.UseMySQL(builder.Configuration.GetConnectionString("db")!));
@@ -40,6 +44,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseStaticFiles();
 
 app.UseCors();
 

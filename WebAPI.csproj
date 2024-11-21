@@ -20,7 +20,7 @@
   <ItemGroup>
     <Folder Include="Exceptions\" />
     <Folder Include="Repositories\" />
-    <Folder Include="Services\" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>

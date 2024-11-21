@@ -6,4 +6,5 @@ public class ProductoRequestDTO
 	public int Stock { get; set; }
 	public decimal Precio { get; set; }
 	public sbyte IdCategoria { get; set; }
+	public IFormFile? Imagen { get; set; }
 }

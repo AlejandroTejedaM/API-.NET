@@ -212,4 +212,7 @@ insert into DetalleVentas (Precio, Cantidad, IdVenta, IdProducto)
 values (2000, 1, 2, 2);
 insert into DetalleVentas (Precio, Cantidad, IdVenta, IdProducto)
 values (3000, 1, 2, 3);
+
+ALTER TABLE Productos
+    ADD Imagen varchar(255);
 ```

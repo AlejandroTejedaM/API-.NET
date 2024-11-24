@@ -50,6 +50,15 @@ public class ProductoController : Controller
 		return Ok(new { message = "Producto agregado" });
 	}
 	
+	[HttpPost("WithImageUrl")]
+	public async Task<IActionResult> AddProductoWithImageUrl([FromBody] ProductoRequestWithImageUrlDTO productoRequest)
+	{
+		var producto = _mapper.Map<Producto>(productoRequest);
+		_db.Entry(producto).State = EntityState.Added;
+		await _db.SaveChangesAsync();
+		return Ok(new { message = "Producto agregado" });
+	}
+	
 	[HttpPut]
 	public async Task<IActionResult> UpdateProducto([FromBody] ProductoDTO productoDto)
 	{

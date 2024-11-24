@@ -14,6 +14,7 @@ public class AutoMapperProfiles : Profile
 		);
 		CreateMap<ProductoDTO, Producto>();
 		CreateMap<ProductoRequestDTO, Producto>();
+		CreateMap<ProductoRequestWithImageUrlDTO, Producto>();
 		CreateMap<Categoria, CategoriaDTO>();
 		CreateMap<CategoriaRequestDTO, Categoria>();
 		CreateMap<CategoriaDTO, Categoria>();

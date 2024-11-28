@@ -47,6 +47,7 @@ create table Productos
     Nombre_Producto varchar(100)        not null,
     Stock           int     default (1) not null,
     Precio          decimal default (0) not null,
+    Image           varchar(250)        null,
     IdCategoria     tinyint             not null,
     constraint fk_productos_categorias foreign key (IdCategoria) references Categorias (Id)
 );
